@@ -120,7 +120,12 @@ h2{font-size:1.2rem;margin-bottom:14px}
 .row .tm{font-family:var(--fm);font-size:.77rem;font-weight:600;color:var(--acc-ink);padding-top:2px;font-variant-numeric:tabular-nums;letter-spacing:-.04em}
 .row .ti{font-size:.96rem;font-weight:500;display:flex;gap:7px;align-items:baseline;flex-wrap:wrap}
 .row .de{font-size:.82rem;color:var(--ink2);margin-top:3px}
-.row .me{font-size:.81rem;color:var(--ink2);margin-top:7px;padding:8px 11px;background:var(--surface2);border-radius:9px}
+.row .me{font-size:.81rem;color:var(--ink2);margin-top:7px;padding:8px 11px;background:var(--surface2);border-radius:9px;
+  display:flex;flex-direction:column;gap:4px}
+.row .me .ln{position:relative;padding-left:9px}
+.row .me .ln::before{content:'';position:absolute;left:0;top:.52em;width:3px;height:3px;border-radius:50%;background:var(--ink3)}
+.row .me .ln:only-child{padding-left:0}
+.row .me .ln:only-child::before{display:none}
 .row .me.w{background:var(--acc-soft);color:var(--ink)}
 .row a.ml{font-family:var(--fm);font-size:.7rem;color:var(--ink3);text-decoration:none;margin-top:6px;display:inline-block}
 .row a.ml:hover{color:var(--acc-ink)}
@@ -186,6 +191,11 @@ td .krw{display:block;font-size:.7rem;color:var(--ink3)}
 .ckr input{margin:3px 0 0;accent-color:var(--acc);width:16px;height:16px;flex:0 0 auto}
 .ckr b{font-size:.88rem;font-weight:600;display:block}
 .ckr span{font-size:.78rem;color:var(--ink2)}
+.ckr .ckd{font-size:.78rem;color:var(--ink2);display:flex;flex-direction:column;gap:4px;margin-top:2px}
+.ckr .ckd .ln{position:relative;padding-left:9px}
+.ckr .ckd .ln::before{content:'';position:absolute;left:0;top:.52em;width:3px;height:3px;border-radius:50%;background:var(--ink3)}
+.ckr .ckd .ln:only-child{padding-left:0}
+.ckr .ckd .ln:only-child::before{display:none}
 .ckr.on b{text-decoration:line-through;color:var(--ink3)}
 .ckr .due{display:inline-block;margin-left:7px;padding:1px 7px;border-radius:20px;background:var(--acc-soft);
   color:var(--acc-ink);font-size:.66rem;font-style:normal;font-weight:700;vertical-align:1px}
@@ -322,18 +332,18 @@ const I=(t,n,d,m,tag,q,w)=>({t,n,d,m,tag,q,w});
 const DAYS=[
 {date:'12/2',dow:'수',leg:'nz',spot:'CHC',sc:'plains',title:'입국 · AKL→CHC',stay:'더하이웨이인',items:[
  I('09:55','오클랜드 도착','대한항공 · 입국심사+생물검역+수하물 60~90분','국내선 터미널 재수속 (도보 10분) · 식품류 신고 · KE 위탁은 1인 2개 23kg (기본1+모닝캄1)',null,'Auckland+International+Airport'),
- I('13:15','AKL→CHC · JQ233','1h25m · 14:40 도착','위탁 현진 20kg / 두환 30kg — 무게제라 개수는 무관 (개당 32kg 이하) · 기내 7kg · 수하물 마감 출발 30분 전','done','Christchurch+Airport'),
- I('저녁','더하이웨이인 체크인','527 Sawyers Arms Rd · 도착 18:00~19:00로 통보해둠','결제 완료 · 환불 불가 예약 · 주차·Wi-Fi 무료 · 숙소 직통 +64 20 4107 3811 · 다음날 08:00 픽업','done','The+Highway+Inn+527+Sawyers+Arms+Road+Christchurch')]},
+ I('13:15','AKL→CHC · JQ233','1h25m · 14:40 도착','위탁 현진 20kg / 두환 30kg — 무게제라 개수는 무관 (개당 32kg 이하) · 기내 7kg · 수하물 마감 출발 30분 전',null,'Christchurch+Airport'),
+ I('저녁','더하이웨이인 체크인','527 Sawyers Arms Rd · 도착 18:00~19:00로 통보해둠','주차·Wi-Fi 무료 · 숙소 직통 +64 20 4107 3811 · 다음날 08:00 픽업',null,'The+Highway+Inn+527+Sawyers+Arms+Road+Christchurch')]},
 {date:'12/3',dow:'목',leg:'nz',spot:'CHC',sc:'plains',title:'캠퍼밴 픽업',stay:'프리 캠핑',items:[
- I('08:00','Maui 픽업','Cascade 4 Berth · 159 Orchard Rd · 인수 1h','온라인 체크인 완료 ✅ · 대여료 완납이라 잔금 없음 · 여권 · 국제운전면허증+한국면허증(2종 보통 가능, 자동 한정이면 자동 차량 확인) · 면책금 0 최대보장 선택 ✅ → 보증금은 <b>$250 신용카드 승인</b> 수준 (임프린트라 체크카드 불가) · 최대보장도 지붕·하부·타이어·유리창·비포장도로는 제외되는 경우가 많으니 인수 때 확인 · 주방 풀세트 포함이니 인수 때 품목 리스트 받아 빠진 것만 메모 · EWOF 라벨 유효기간 확인(파워사이트 연결 조건)','done','Maui+Christchurch+159+Orchard+Road'),
- I('~09:00','인수 점검 — 출고 전에 끝낼 것','① 외관 전체를 영상으로 한 바퀴 — 지붕·하부·앞유리·타이어까지 (최대보장에서도 제외되는 경우가 많아 반납 분쟁 1순위) ② 워터탱크·오수 게이지·히터·냉장고·가스 작동 확인 ③ 어닝 펴고 접어보기 ④ 오수·청수 밸브와 덤프 방법 직접 들어볼 것 ⑤ EWOF 라벨 날짜 ⑥ 주방 품목 리스트 대조해 빠진 것 메모','차체 높이 3.10m · 길이 7.00m · 폭 2.25m — 지하주차장·드라이브스루·저가도 판단 기준이니 외워둘 것 · 24시간 사고접수 번호와 로드사이드 번호를 휴대폰에 저장',null,'Maui+Christchurch+159+Orchard+Road',1),
+ I('08:00','Maui 픽업','Cascade 4 Berth · 159 Orchard Rd · 인수 1h','<b>지참</b> 여권 · 국제운전면허증 + 한국 면허증 (2종 보통 가능, 자동 한정이면 자동 차량인지 확인) · 보증금 $250 승인용 신용카드 — 임프린트라 체크카드 불가',null,'Maui+Christchurch+159+Orchard+Road'),
+ I('~09:00','인수 점검 — 출고 전에 끝낼 것','영상·작동 확인·치수 — 출고 후엔 되돌릴 수 없다','외관 전체를 영상으로 한 바퀴 — 지붕·하부·앞유리·타이어까지. 최대보장에서도 제외되는 경우가 많아 반납 분쟁 1순위다 · 워터탱크·오수 게이지·히터·냉장고·가스 작동 · 어닝 펴고 접어보기 · 오수·청수 밸브와 덤프 방법 직접 들어볼 것 · EWOF 라벨 날짜 — 파워사이트 연결 조건 · 주방 품목 리스트 대조해 빠진 것만 메모 · <b>치수 3.10m × 7.00m × 2.25m</b> — 주차장·드라이브스루 판단 기준 · 24시간 사고접수·로드사이드 번호를 휴대폰에 저장',null,'Maui+Christchurch+159+Orchard+Road'),
  I('09:15','잡화 · The Warehouse','45 Chalmers St, Hornby — Pak\'nSave 바로 옆, 같은 상권이라 차 한 번만 세우면 됨','수건·슬리퍼·캠핑의자·보냉백 · 방충제와 선크림도 여기서 보충(테카포·와나카는 선택지가 없어 훨씬 비쌈) · 남섬엔 다이소급 저가점이 없고 Kmart은 리카턴뿐인데 지하주차장이라 캠퍼밴 진입 불가',null,'The+Warehouse+The+Hub+45+Chalmers+Street+Hornby+Christchurch'),
  I('10:00','장보기 · Pak\'nSave Hornby','The Hub, 418 Main South Rd — 공항에서 15분 · 냉장식품은 마지막에 사서 바로 냉장고로','뉴질랜드 최저가 체인 · 지상 주차라 캠퍼밴 진입 가능 · 장바구니 지참(무료 봉투 없음) · 9박치를 여기서 한 번에',null,'PAKnSAVE+Hornby+Christchurch'),
  I('목록','마트에서 살 것','Whittaker\'s 초콜릿 · Pineapple Lumps · L&P 탄산 · Tip Top 호키포키 아이스크림 · Watties 토마토소스 · Cookie Time','마누카 꿀은 슈퍼가 면세점보다 쌈 (UMF/MGO 등급 확인) · 12월은 체리·살구 제철이라 과일 노점도 노려볼 것',null,'PAKnSAVE+Hornby+Christchurch'),
  I('저녁','프리 캠핑 · Coes Ford','The Lake Road, Leeston · 셀윈 강변 · Selwyn 지구 지정 구역 · 무료 · 연중 · 최대 28박','크라이스트처치에서 35분 (Hornby에서 25분) · 수세식 화장실·식수 있음 · 덤프스테이션 없음 · 다음날 SH1 남행과 동선 일치 · 백업: Lakeside Domain(무료) / Waihora Park($10)',null,'Coes+Ford+Recreation+Reserve+The+Lake+Road+Leeston')]},
 {date:'12/4',dow:'금',leg:'nz',spot:'TKP',sc:'lake',title:'테카포 이동',stay:'Lakes Edge 1박째',items:[
  I('오전','CHC→테카포','3h · 227km','제럴딘 휴게',null,'Lake+Tekapo'),
- I('15:00','Lakes Edge 체크인','호수 정면 Powered 사이트 · 현장 결제 — 12/4 아침 예약 카드에서 자동 인출','체크인 15:00 / 체크아웃 10:00 · 신용카드 결제 시 2% 수수료 · 파워사이트는 캠퍼밴 EWOF(전기안전검사증) 라벨 필요 · ⚠️ WhatsApp 결제 요청은 사기, 공식 +64 3 680 6825','done','Lakes+Edge+Holiday+Park+Tekapo'),
+ I('15:00','Lakes Edge 체크인','호수 정면 Powered 사이트','체크인 15:00 / 체크아웃 10:00 · 파워사이트는 캠퍼밴 EWOF(전기안전검사증) 라벨 필요 · <b>WhatsApp 결제 요청은 사기</b> — 공식 번호는 +64 3 680 6825',null,'Lakes+Edge+Holiday+Park+Tekapo'),
  I('저녁','선한 양치기 교회 · 별','다크스카이 보호구역','내일 트레킹 날씨 확인 → 4·5일 중 맑은 날',null,'Church+of+the+Good+Shepherd+Tekapo')]},
 {date:'12/5',dow:'토',leg:'nz',spot:'AKI',sc:'alps',title:'마운트쿡 트레킹',stay:'Lakes Edge 2박째',items:[
  I('06:00','테카포→마운트쿡','SH8→SH80 편도 1h10m · 전 구간 포장','날씨 나쁘면 4일과 교체 · 후커밸리 진입로 2km는 비포장이지만 캠핑장 접근로라 계약상 허용',null,'Aoraki+Mount+Cook'),
@@ -347,20 +357,20 @@ const DAYS=[
  I('낮~','차박지 선점','예약 불가 · 선착순 · 무료','이른 도착 필수 · self-contained 전용 · SH8에서 바로 들어가는 캠퍼밴 상용 차박지 · 화장실 없음 — 테카포 체크아웃 때 오수 처리하고 올 것','free','Lake+Pukaki+campervan+overnight')]},
 {date:'12/7',dow:'월',leg:'nz',spot:'HWA',sc:'wanaka',title:'와나카 이동',stay:'The Camp 1박째',items:[
  I('오전','푸카키→와나카','2.5~3h · 린디스 패스 (SH8, 971m)','출발 전 연료 가득 (중간 주유소 드묾) · 린디스는 전 구간 포장 간선도로라 캠퍼밴 제한 없음 — 경사만 주의',null,'Lindis+Pass'),
- I('오후','The Camp 체크인','부지 내 시크릿 사우나','와나카 시내까지 차 15분','done','The+Camp+Lake+Hawea')]},
+ I('오후','The Camp 체크인','부지 내 시크릿 사우나','와나카 시내까지 차 15분',null,'The+Camp+Lake+Hawea')]},
 {date:'12/8',dow:'화',leg:'nz',spot:'HWA',sc:'wanaka',title:'와나카 · 사우나',stay:'The Camp 2박째',items:[
  I('오전~','와나카 자유시간',null,'호수 수영 · 시내 · 카페 · That Wanaka Tree · 차로 나갈 땐 와나카 호수 남북 도로까지만 — Mt Aspiring Rd(Treble Cone 이후)와 카드로나 밸리는 캠퍼밴 금지',null,'Lake+Wanaka'),
  I('(선택)','Rippon','무료 시음 · 예약제','미예약 — 워크인 불가할 수 있음','opt','Rippon+Vineyard+Wanaka'),
  I('대안','로이스 피크 — 체력 쓸 의향이면','와나카 서쪽 6km, Mt Aspiring Rd · 왕복 16km · 5~7h · +1,258m — 뉴질랜드에서 사진으로 가장 유명한 능선','마우이가 캠퍼밴 주차 가능이라 명시한 무료 주차장 (금지 구간인 Treble Cone 분기보다 한참 앞) · 성수기엔 09시에 만차라 이른 출발 필수 · 화장실·물 없음, 와나카에서 준비','opt','Roys+Peak+Track+Wanaka'),
- I('19:00','The Secret Sauna','공용 2시간 · NZD 128','수영복·수건·슬리퍼 · 캠핑장 내 도보 · 일몰 21:20','done','The+Secret+Sauna+Lake+Hawea')]},
+ I('19:00','The Secret Sauna','공용 2시간','수영복·수건·슬리퍼 · 캠핑장 내 도보 · 일몰 21:20',null,'The+Secret+Sauna+Lake+Hawea')]},
 {date:'12/9',dow:'수',leg:'nz',spot:'BAN',sc:'vine',title:'배녹번 와이너리',stay:'Driftaway 1박째',items:[
  I('10:00','체크아웃 → 배녹번','1h10m','오수/물탱크 처리',null,'Bannockburn+Central+Otago'),
- I('11:45','Mt Difficulty','점심 + 시음 $25/인','테이블 15분 홀드 · +64 3 445 3445 · 운전자 시음 최소화','done','Mt+Difficulty+Wines+Bannockburn',1),
- I('13:30','Felton Road','무료 착석 시음 · 차로 2~3분','게이트 코드 필요 — 신호 약함, 미리 캡처해 둘 것','done','Felton+Road+Bannockburn',1),
+ I('11:45','Mt Difficulty','점심 + 시음 $25/인','테이블 15분 홀드 · +64 3 445 3445 · 운전자 시음 최소화',null,'Mt+Difficulty+Wines+Bannockburn',1),
+ I('13:30','Felton Road','무료 착석 시음 · 차로 2~3분','게이트 코드 필요 — 신호 약함, 미리 캡처해 둘 것',null,'Felton+Road+Bannockburn',1),
  I('14:30','크롬웰→퀸스타운','SH6 카와라우 협곡 65km · 1h','크라운레인지는 캠퍼밴 금지라 SH6이 확정 경로 — 어차피 크롬웰 기준 최단이라 손해 없음 · 여유 되면 깁스턴 밸리 경유',null,'Queenstown'),
- I('저녁','Driftaway 체크인 · 캠핑장의 밤','호수뷰 사이트 — 3박 중 저녁이 온전히 비는 유일한 날','Frankton Beach 도보권 · 캠퍼밴 요리와 호숫가 산책에 쓰기 좋은 밤','done','Driftaway+Queenstown')]},
+ I('저녁','Driftaway 체크인 · 캠핑장의 밤','호수뷰 사이트 — 3박 중 저녁이 온전히 비는 유일한 날','Frankton Beach 도보권 · 캠퍼밴 요리와 호숫가 산책에 쓰기 좋은 밤',null,'Driftaway+Queenstown')]},
 {date:'12/10',dow:'목',leg:'nz',spot:'ZQN',sc:'qt',title:'래프팅 · Amisfield',stay:'Driftaway 2박째',items:[
- I('08:00','Shotover 래프팅','3~5등급 · 웻슈트 포함 · 4.5h','08:30 집합 · 수영복·수건 · 복귀 시각 확인 · 스키퍼스 캐니언은 업체 4WD 버스로 들어감 — 캠퍼밴은 캠핑장에 두고 간다','done','Shotover+River+Rafting'),
+ I('08:00','Shotover 래프팅','3~5등급 · 웻슈트 포함 · 4.5h','08:30 집합 · 수영복·수건 · 복귀 시각 확인 · 스키퍼스 캐니언은 업체 4WD 버스로 들어감 — 캠퍼밴은 캠핑장에 두고 간다',null,'Shotover+River+Rafting'),
  I('14:00','택시 → Amisfield','10분 · 약 NZ$25','버스 노선 없음',null,'Amisfield+Winery'),
  I('14:30','Amisfield 시음','Explorer $40/인 (구매 시 면제) · 예약 불필요','셀러도어 16:30 마감 · 플레이트 $15~35','free','Amisfield+Winery',1),
  I('16:30','택시 → 시내 · 쇼핑하는 날','20분 · 약 NZ$40 — 기념품은 이날 한 번에','상점 ~21시 · 캠핑장 안 거치고 직행',null,'Queenstown+town+centre'),
@@ -374,10 +384,10 @@ const DAYS=[
  I('저녁 B','시내 추가 쇼핑','Orbus 15~20분 · 상점 ~21시','어제 못 산 게 있으면. 돌아와서 짐 싸면 늦어지는 건 감수','opt','Queenstown+town+centre'),
  I('밤','짐 정리',null,'캐리어 패킹 + 차량 내부 정리 (오수·물탱크는 다음날 아침)',null,'Driftaway+Queenstown')]},
 {date:'12/12',dow:'토',leg:'au',cur:'NZD',spot:'VS',sc:'harbour',title:'반납 · 시드니 이동',stay:'View Sydney 1박째',items:[
- I('~09:30','급유 → Maui 반납','50 Lucas Place, Frankton · 마감 16:30 · 오전 반납','반납 전 순서 ① 오수·화장실 카세트 비우고 청수 보충 (덤프는 캠핑장에서 — 공항 근처엔 없음) ② 연료 만땅, 영수증 보관 ③ LPG 가스는 받은 상태로 반납이 조건인지 인수 때 확인 — 필요하면 리필(9kg 교체 약 4만원, 리필이 싸지만 Caltex 전용인 경우가 많아 전날 전화) ④ 냉장고·개인물품 전부 비우기 ⑤ 반납 직후 상태 영상 한 번 더 ⑥ $250 카드 승인 해제 시점 확인','done','Maui+Queenstown+50+Lucas+Place',1),
+ I('~09:30','급유 → Maui 반납','50 Lucas Place, Frankton · 마감 16:30 · 오전 반납','반납 전 순서 ① 오수·화장실 카세트 비우고 청수 보충 (덤프는 캠핑장에서 — 공항 근처엔 없음) ② 연료 만땅, 영수증 보관 ③ LPG 가스는 받은 상태로 반납이 조건인지 인수 때 확인 — 필요하면 리필(9kg 교체 약 4만원, 리필이 싸지만 Caltex 전용인 경우가 많아 전날 전화) ④ 냉장고·개인물품 전부 비우기 ⑤ 반납 직후 상태 영상 한 번 더 ⑥ $250 카드 승인 해제 시점 확인',null,'Maui+Queenstown+50+Lucas+Place',1),
  I('12:00','퀸스타운 공항','국제선 3h 전','남은 식품 처분 (호주 검역 엄격)',null,'Queenstown+Airport',1),
- I('15:05','ZQN→SYD · VA162','3h20m · 16:25 도착','위탁 3개 · 개당 23kg · 3변합 140cm — 전 구간 중 가장 작은 규격이라 큰 캐리어는 여기 기준 · 기내 7kg 1개','done','Sydney+Kingsford+Smith+Airport'),
- I('16:25','View Sydney 체크인','공항→North Sydney역 30분 · 17 Blue St · 체크인 15:00부터','아고다 예약 · 대표 투숙객 두환 — 체크인 시 본인 사진 신분증 필요 · 미결제 상태로 12/8 자동 청구 예정 · 12/10까지 무료 취소 · 커피·차/Wi-Fi/피트니스 포함','done','View+Sydney+17+Blue+Street+North+Sydney'),
+ I('15:05','ZQN→SYD · VA162','3h20m · 16:25 도착','위탁 3개 · 개당 23kg · 3변합 140cm — 전 구간 중 가장 작은 규격이라 큰 캐리어는 여기 기준 · 기내 7kg 1개',null,'Sydney+Kingsford+Smith+Airport'),
+ I('16:25','View Sydney 체크인','공항→North Sydney역 30분 · 17 Blue St · 체크인 15:00부터','대표 투숙객 두환 — 체크인 시 본인 사진 신분증 필요 · 커피·차/Wi-Fi/피트니스 포함',null,'View+Sydney+17+Blue+Street+North+Sydney'),
  I('저녁','하버브릿지 도보','Cumberland St 계단 · 무료 · 20~30분','건너면 숙소 방향 (Milsons Point)',null,'Sydney+Harbour+Bridge+Cumberland+Street')]},
 {date:'12/13',dow:'일',leg:'au',spot:'BON',sc:'ocean',title:'본다이 · 프리다이빙',stay:'View Sydney 2박째',items:[
  I('08:00','본다이 · 아이스버그','전기자전거 1시간','깃발 구간만',null,'Bondi+Beach'),
@@ -398,7 +408,7 @@ const DAYS=[
  I('낮','마트에서 살 것','Woolworths · Coles — 같은 물건이 공항 면세점보다 쌈','팀탐(맛 종류가 한국보다 훨씬 많음) · Cadbury 호주 한정(Caramilk) · Arnott\'s 비스킷(Mint Slice·Shapes) · 마카다미아 · 꿀 · Bundaberg 진저비어 · Blackmores·Swisse 영양제 · Lucas Papaw 연고 · 베지마이트 · 치킨솔트',null,'Woolworths+Sydney+CBD'),
  I('낮','반입 주의','한국 입국 기준','육포·생과일·육류 가공품은 반입 불가 · 꿀은 상업 포장이면 가능 · 액체류는 위탁수하물로',null,null),
  I('~18:45','공항 이동','North Sydney역→공항 30분','출발 3h 전',null,'Sydney+Airport+Terminal+1+International'),
- I('21:55','KE402 출발','B787-10 · T1','위탁 1인 2개 23kg (기본1+모닝캄1) · 3변합 158cm · 기내 10kg — 기내용 캐리어도 부칠 수 있음','done','Sydney+Airport+Terminal+1+International')]},
+ I('21:55','KE402 출발','B787-10 · T1','위탁 1인 2개 23kg (기본1+모닝캄1) · 3변합 158cm · 기내 10kg — 기내용 캐리어도 부칠 수 있음',null,'Sydney+Airport+Terminal+1+International')]},
 {date:'12/16',dow:'수',leg:'au',spot:'FM',sc:'sky',title:'인천 도착',stay:'—',items:[
  I('06:35','인천 T2 도착','8h40m',null,null,'Incheon+International+Airport')]}];
 
@@ -613,6 +623,20 @@ const LG=[{w:'인천 T2 · 12/1',n:'대한항공 프레스티지 라운지',f:'I
 /* ══ helpers ══ */
 const $=(s,r)=>(r||document).querySelector(s);
 const el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e;};
+/* ' · ' 로 나눠 한 줄씩 — 메모가 길어질수록 한 덩어리로는 안 읽힌다. <b>만 살린다 */
+const lines=(cls,txt)=>{
+  const box=el('div',cls);
+  String(txt).split(' · ').forEach(part=>{
+    const ln=el('div','ln');
+    part.split(/(<b>.*?<\/b>)/).forEach(seg=>{
+      if(!seg)return;
+      const m=seg.match(/^<b>([\s\S]*)<\/b>$/);
+      ln.append(m?el('b',null,m[1]):document.createTextNode(seg));
+    });
+    box.append(ln);
+  });
+  return box;
+};
 const store={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},
              set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 const TAG={done:'완료',free:'예약불필요',warn:'확인',opt:'선택'};
@@ -810,7 +834,7 @@ function renderSched(d,i){
     if(it.tag)t.append(el('span','bg b-'+it.tag,TAG[it.tag]));
     b.append(t);
     if(it.d)b.append(el('div','de',it.d));
-    if(it.m)b.append(el('div','me'+(it.w?' w':''),it.m));
+    if(it.m)b.append(lines('me'+(it.w?' w':''),it.m));
     if(it.q){const a=document.createElement('a');a.className='ml';a.target='_blank';a.rel='noopener';
       a.href='https://www.google.com/maps/search/?api=1&query='+it.q;a.textContent='지도 ↗';b.append(a);}
     r.append(b);p.append(r);
@@ -1054,7 +1078,7 @@ TODO.forEach(([id,t,s,due,url])=>{
   c.addEventListener('change',()=>{store.set(k,c.checked);l.classList.toggle('on',c.checked);});
   const d=el('div'),hd=el('b',null,t);
   if(due)hd.append(el('i','due',due));
-  d.append(hd,el('span',null,s));
+  d.append(hd,lines('ckd',s));
   if(url){                                   // 링크 클릭이 체크박스를 토글하지 않게
     const a=el('a','golink');a.href=url;a.target='_blank';a.rel='noopener';a.textContent='바로가기 ↗';
     a.addEventListener('click',e=>e.stopPropagation());
