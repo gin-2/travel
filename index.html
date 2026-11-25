@@ -298,7 +298,7 @@ footer{border-top:1px solid var(--line);padding:16px 0 34px;color:var(--ink3);fo
 </div>
 
 <nav class="nav"><div class="wrap nav-in">
-  <a href="#s-day" class="on">일정</a><a href="#s-map">경로</a><a href="#s-res">예약</a><a href="#s-lg">라운지</a>
+  <a href="#s-day" class="on">일정</a><a href="#s-map">경로</a><a href="#s-drv">운전</a><a href="#s-res">예약</a><a href="#s-lg">라운지</a>
 </div></nav>
 
 <main class="wrap">
@@ -313,6 +313,11 @@ footer{border-top:1px solid var(--line);padding:16px 0 34px;color:var(--ink3);fo
       <button data-m="nz" aria-pressed="true">남섬</button><button data-m="syd" aria-pressed="false">시드니</button>
     </div>
     <div class="mg"><div class="mc" id="mapc"></div><div class="gd" id="gd"></div></div>
+  </section>
+
+  <section id="s-drv">
+    <h2>운전</h2>
+    <div class="lgs" id="drvs"></div>
   </section>
 
   <section id="s-res">
@@ -347,6 +352,7 @@ const DAYS=[
  I('저녁','더하이웨이인 체크인','527 Sawyers Arms Rd · 도착 18:00~19:00로 통보해둠','결제 완료 · 환불 불가 예약 · 주차·Wi-Fi 무료 · 숙소 직통 +64 20 4107 3811 · 다음날 08:00 픽업','done','The+Highway+Inn+527+Sawyers+Arms+Road+Christchurch')]},
 {date:'12/3',dow:'목',leg:'nz',spot:'CHC',sc:'plains',title:'캠퍼밴 픽업',stay:'프리 캠핑',items:[
  I('08:00','Maui 픽업','Cascade 4 Berth · 159 Orchard Rd · 인수 1h','온라인 체크인 완료 ✅ · 대여료 완납이라 잔금 없음 · 여권 · 국제운전면허증+한국면허증(2종 보통 가능, 자동 한정이면 자동 차량 확인) · 면책금 0 최대보장 선택 ✅ → 보증금은 <b>$250 신용카드 승인</b> 수준 (임프린트라 체크카드 불가) · 최대보장도 지붕·하부·타이어·유리창·비포장도로는 제외되는 경우가 많으니 인수 때 확인 · 주방 풀세트 포함이니 인수 때 품목 리스트 받아 빠진 것만 메모 · EWOF 라벨 유효기간 확인(파워사이트 연결 조건)','done','Maui+Christchurch+159+Orchard+Road'),
+ I('~09:00','인수 점검 — 출고 전에 끝낼 것','① 외관 전체를 영상으로 한 바퀴 — 지붕·하부·앞유리·타이어까지 (최대보장에서도 제외되는 경우가 많아 반납 분쟁 1순위) ② 워터탱크·오수 게이지·히터·냉장고·가스 작동 확인 ③ 어닝 펴고 접어보기 ④ 오수·청수 밸브와 덤프 방법 직접 들어볼 것 ⑤ EWOF 라벨 날짜 ⑥ 주방 품목 리스트 대조해 빠진 것 메모','차체 높이 3.10m · 길이 7.00m · 폭 2.25m — 지하주차장·드라이브스루·저가도 판단 기준이니 외워둘 것 · 24시간 사고접수 번호와 로드사이드 번호를 휴대폰에 저장',null,'Maui+Christchurch+159+Orchard+Road',1),
  I('09:15','잡화 · The Warehouse','45 Chalmers St, Hornby — Pak\'nSave 바로 옆, 같은 상권이라 차 한 번만 세우면 됨','수건·슬리퍼·캠핑의자·보냉백 · 방충제와 선크림도 여기서 보충(테카포·와나카는 선택지가 없어 훨씬 비쌈) · 남섬엔 다이소급 저가점이 없고 Kmart은 리카턴뿐인데 지하주차장이라 캠퍼밴 진입 불가',null,'The+Warehouse+The+Hub+45+Chalmers+Street+Hornby+Christchurch'),
  I('10:00','장보기 · Pak\'nSave Hornby','The Hub, 418 Main South Rd — 공항에서 15분 · 냉장식품은 마지막에 사서 바로 냉장고로','뉴질랜드 최저가 체인 · 지상 주차라 캠퍼밴 진입 가능 · 장바구니 지참(무료 봉투 없음) · 9박치를 여기서 한 번에',null,'PAKnSAVE+Hornby+Christchurch'),
  I('목록','마트에서 살 것','Whittaker\'s 초콜릿 · Pineapple Lumps · L&P 탄산 · Tip Top 호키포키 아이스크림 · Watties 토마토소스 · Cookie Time','마누카 꿀은 슈퍼가 면세점보다 쌈 (UMF/MGO 등급 확인) · 12월은 체리·살구 제철이라 과일 노점도 노려볼 것',null,'PAKnSAVE+Hornby+Christchurch'),
@@ -356,7 +362,7 @@ const DAYS=[
  I('15:00','Lakes Edge 체크인','호수 정면 Powered 사이트 · 현장 결제 — 12/4 아침 예약 카드에서 자동 인출','체크인 15:00 / 체크아웃 10:00 · 신용카드 결제 시 2% 수수료 · 파워사이트는 캠퍼밴 EWOF(전기안전검사증) 라벨 필요 · ⚠️ WhatsApp 결제 요청은 사기, 공식 +64 3 680 6825','done','Lakes+Edge+Holiday+Park+Tekapo'),
  I('저녁','선한 양치기 교회 · 별','다크스카이 보호구역','내일 트레킹 날씨 확인 → 4·5일 중 맑은 날',null,'Church+of+the+Good+Shepherd+Tekapo')]},
 {date:'12/5',dow:'토',leg:'nz',spot:'AKI',sc:'alps',title:'마운트쿡 트레킹',stay:'Lakes Edge 2박째',items:[
- I('06:00','테카포→마운트쿡','편도 1h10m','날씨 나쁘면 4일과 교체 · 주차장 성수기 혼잡',null,'Aoraki+Mount+Cook'),
+ I('06:00','테카포→마운트쿡','SH8→SH80 편도 1h10m · 전 구간 포장','날씨 나쁘면 4일과 교체 · 주차장 성수기 혼잡 · ⚠️ 후커밸리 진입로는 2km 비포장이지만 White Horse Hill 캠핑장 접근로(5km 미만)라 계약상 허용 — 반면 태즈먼밸리·볼헛 로드(블루레이크·빙하 전망대 방향)는 8km 비포장이라 진입 금지',null,'Aoraki+Mount+Cook',1),
  I('07:30','Hooker Valley Track','왕복 10km · 3.5h · 평탄 — 출렁다리 3개를 건너 빙하호까지 가는, 마운트쿡을 가장 가까이서 보는 당일 코스. 난이도 대비 경치가 최상급이라 남섬에서 가장 많이 걷는 트랙.','데이팩·물·선크림·바람막이',null,'Hooker+Valley+Track'),
  I('12:30','테카포 복귀',null,null,null,'Lakes+Edge+Holiday+Park+Tekapo'),
  I('13:30','Morelea Lakeside · 파블로바','80 Lakeside Drive · 10:00~16:00 (화 14:30~) · 호숫가 바로 앞','16시 마감이라 트레킹 복귀 직후로 · 온천은 그 뒤',null,'Morelea+Lakeside+Lake+Tekapo'),
@@ -364,35 +370,35 @@ const DAYS=[
 {date:'12/6',dow:'일',leg:'nz',spot:'PUK',sc:'lake',title:'푸카키 차박',stay:'Lake Pukaki 차박',items:[
  I('10:00','테카포 체크아웃',null,'물탱크 보충 + 오수 처리',null,'Lakes+Edge+Holiday+Park+Tekapo'),
  I('10:45','Mt Cook Alpine Salmon','09:00~17:00 · 예약 불필요','사시미 포장 · 짧게 머물고 이동',null,'Mt+Cook+Alpine+Salmon+Shop+Lake+Pukaki'),
- I('낮~','차박지 선점','예약 불가 · 선착순 · 무료','이른 도착 필수 · self-contained 전용','free','Lake+Pukaki+campervan+overnight')]},
+ I('낮~','차박지 선점','예약 불가 · 선착순 · 무료','이른 도착 필수 · self-contained 전용 · ⚠️ 프리덤캠핑 구역은 "공인 캠핑장"이 아니라 5km 비포장 예외가 적용되지 않음 — 입구에서 노면을 보고, 자갈길이 길면 SH8에서 바로 들어가는 포장 사이트로 변경','free','Lake+Pukaki+campervan+overnight',1)]},
 {date:'12/7',dow:'월',leg:'nz',spot:'HWA',sc:'wanaka',title:'와나카 이동',stay:'The Camp 1박째',items:[
- I('오전','푸카키→와나카','2.5~3h · 린디스 패스','출발 전 연료 가득 (중간 주유소 드묾)',null,'Lindis+Pass'),
+ I('오전','푸카키→와나카','2.5~3h · 린디스 패스 (SH8, 971m)','출발 전 연료 가득 (중간 주유소 드묾) · 린디스는 전 구간 포장 간선도로라 캠퍼밴 제한 없음 — 경사만 주의',null,'Lindis+Pass'),
  I('오후','The Camp 체크인','부지 내 시크릿 사우나','와나카 시내까지 차 15분','done','The+Camp+Lake+Hawea')]},
 {date:'12/8',dow:'화',leg:'nz',spot:'HWA',sc:'wanaka',title:'와나카 · 사우나',stay:'The Camp 2박째',items:[
- I('오전~','와나카 자유시간',null,'호수 수영 · 시내 · 카페 · That Wanaka Tree',null,'Lake+Wanaka'),
+ I('오전~','와나카 자유시간',null,'호수 수영 · 시내 · 카페 · That Wanaka Tree · ⚠️ 차로 나갈 때 두 방향 금지 — Mt Aspiring Rd는 Treble Cone 분기 이후(다이아몬드 레이크·롭로이 빙하), 카드로나 밸리 로드는 전 구간',null,'Lake+Wanaka',1),
  I('(선택)','Rippon','무료 시음 · 예약제','미예약 — 워크인 불가할 수 있음','opt','Rippon+Vineyard+Wanaka'),
  I('19:00','The Secret Sauna','공용 2시간 · NZD 128','수영복·수건·슬리퍼 · 캠핑장 내 도보 · 일몰 21:20','done','The+Secret+Sauna+Lake+Hawea')]},
 {date:'12/9',dow:'수',leg:'nz',spot:'BAN',sc:'vine',title:'배녹번 와이너리',stay:'Driftaway 1박째',items:[
  I('10:00','체크아웃 → 배녹번','1h10m','오수/물탱크 처리',null,'Bannockburn+Central+Otago'),
  I('11:45','Mt Difficulty','점심 + 시음 $25/인','테이블 15분 홀드 · +64 3 445 3445 · 운전자 시음 최소화','done','Mt+Difficulty+Wines+Bannockburn',1),
  I('13:30','Felton Road','무료 착석 시음 · 차로 2~3분','게이트 코드 필요 — 신호 약함, 미리 캡처해 둘 것','done','Felton+Road+Bannockburn',1),
- I('14:30','크롬웰→퀸스타운','크라운레인지 1h','급커브·경사 · 여유 되면 Cloudy Bay 경유',null,'Queenstown'),
+ I('14:30','크롬웰→퀸스타운','SH6 카와라우 협곡 65km · 1h','⚠️ 크라운레인지/카드로나 밸리는 Maui 계약상 진입 금지 — 구글맵이 그쪽을 추천해도 SH6으로 우회 · 여유 되면 깁스턴 밸리 경유',null,'Queenstown',1),
  I('저녁','Driftaway 체크인 · 캠핑장의 밤','호수뷰 사이트 — 3박 중 저녁이 온전히 비는 유일한 날','Frankton Beach 도보권 · 캠퍼밴 요리와 호숫가 산책에 쓰기 좋은 밤','done','Driftaway+Queenstown')]},
 {date:'12/10',dow:'목',leg:'nz',spot:'ZQN',sc:'qt',title:'래프팅 · Amisfield',stay:'Driftaway 2박째',items:[
- I('08:00','Shotover 래프팅','3~5등급 · 웻슈트 포함 · 4.5h','08:30 집합 · 수영복·수건 · 복귀 시각 확인','done','Shotover+River+Rafting'),
+ I('08:00','Shotover 래프팅','3~5등급 · 웻슈트 포함 · 4.5h','08:30 집합 · 수영복·수건 · 복귀 시각 확인 · ⚠️ 스키퍼스 로드는 캠퍼밴 진입 금지 — 업체 4WD 버스로만 이동하고 차로 따라가지 말 것','done','Shotover+River+Rafting',1),
  I('14:00','택시 → Amisfield','10분 · 약 NZ$25','버스 노선 없음',null,'Amisfield+Winery'),
  I('14:30','Amisfield 시음','Explorer $40/인 (구매 시 면제) · 예약 불필요','셀러도어 16:30 마감 · 플레이트 $15~35','free','Amisfield+Winery',1),
  I('16:30','택시 → 시내 · 쇼핑하는 날','20분 · 약 NZ$40 — 기념품은 이날 한 번에','상점 ~21시 · 캠핑장 안 거치고 직행',null,'Queenstown+town+centre'),
  I('17:00','쇼핑 리스트','메리노·포섬 메리노 니트 · 어그 · 마누카 꿀 · 현지 로스터 원두 · 그린스톤(포우나무)','포섬 메리노는 뉴질랜드에서만 나는 혼방 · 가게는 맛집·볼거리 탭 참고',null,'Queenstown+town+centre'),
  I('20:30','Orbus로 복귀','15~20분','Bee Card $2 / 현금 $4',null,'Queenstown+Bus+Hub')]},
 {date:'12/11',dow:'금',leg:'nz',spot:'RTB',sc:'forest',title:'루트번 트레킹',stay:'Driftaway 3박째',items:[
- I('08:00','Routeburn Track','Shelter→Falls Hut 왕복 9km · 4~6h · 오르막 520m · 무료 — 그레이트 워크 10선 중 하나. 보통 2~3일 종주지만 이 구간만으로 계곡·폭포·산장 전망이라는 핵심을 다 봄. 밀포드와 같은 피오르드랜드 생태.','입구까지 1h15m (글레노키 경유) · 우비·샌드플라이 기피제','free','Routeburn+Shelter'),
- I('오후','퀸스타운 복귀','입구에서 1시간 15분',null,null,'Queenstown'),
+ I('08:00','Routeburn Track','Shelter→Falls Hut 왕복 9km · 4~6h · 오르막 520m · 무료 — 그레이트 워크 10선 중 하나. 보통 2~3일 종주지만 이 구간만으로 계곡·폭포·산장 전망이라는 핵심을 다 봄. 밀포드와 같은 피오르드랜드 생태.','⚠️ 글레노키 이후 25km가 부분 비포장 — 캠퍼밴 진입 금지(사고 시 보험 무효 + $300). 퀸스타운 출발 트레일헤드 셔틀 이용 · 우비·샌드플라이 기피제','free','Routeburn+Shelter',1),
+ I('오후','퀸스타운 복귀','셔틀 1시간 15분','캠퍼밴은 캠핑장에 두고 가는 날',null,'Queenstown'),
  I('저녁 A','캠핑장에서 마무리','마지막 밤을 조용히','Frankton Beach 호숫가 · 짐 싸기와 차량 정리를 느긋하게','opt','Driftaway+Queenstown'),
  I('저녁 B','시내 추가 쇼핑','Orbus 15~20분 · 상점 ~21시','어제 못 산 게 있으면. 돌아와서 짐 싸면 늦어지는 건 감수','opt','Queenstown+town+centre'),
  I('밤','짐 정리',null,'캐리어 패킹 + 차량 내부 정리 (오수·물탱크는 다음날 아침)',null,'Driftaway+Queenstown')]},
 {date:'12/12',dow:'토',leg:'au',cur:'NZD',spot:'VS',sc:'harbour',title:'반납 · 시드니 이동',stay:'View Sydney 1박째',items:[
- I('~09:30','급유 → Maui 반납','마감 16:30 · 오전 반납','연료 가득 · 개인물품 · 오수/물탱크','done','Maui+Queenstown+50+Lucas+Place'),
+ I('~09:30','급유 → Maui 반납','50 Lucas Place, Frankton · 마감 16:30 · 오전 반납','반납 전 순서 ① 오수·화장실 카세트 비우고 청수 보충 (덤프는 캠핑장에서 — 공항 근처엔 없음) ② 연료 만땅, 영수증 보관 ③ LPG 가스는 받은 상태로 반납이 조건인지 인수 때 확인 — 필요하면 리필(9kg 교체 약 4만원, 리필이 싸지만 Caltex 전용인 경우가 많아 전날 전화) ④ 냉장고·개인물품 전부 비우기 ⑤ 반납 직후 상태 영상 한 번 더 ⑥ $250 카드 승인 해제 시점 확인','done','Maui+Queenstown+50+Lucas+Place',1),
  I('12:00','퀸스타운 공항','국제선 3h 전','남은 식품 처분 (호주 검역 엄격)',null,'Queenstown+Airport',1),
  I('15:05','ZQN→SYD · VA162','3h20m · 16:25 도착','위탁 3개 · 개당 23kg · 3변합 140cm — 전 구간 중 가장 작은 규격이라 큰 캐리어는 여기 기준 · 기내 7kg 1개','done','Sydney+Kingsford+Smith+Airport'),
  I('16:25','View Sydney 체크인','공항→North Sydney역 30분 · 17 Blue St · 체크인 15:00부터','아고다 예약 · 대표 투숙객 두환 — 체크인 시 본인 사진 신분증 필요 · 미결제 상태로 12/8 자동 청구 예정 · 12/10까지 무료 취소 · 커피·차/Wi-Fi/피트니스 포함','done','View+Sydney+17+Blue+Street+North+Sydney'),
@@ -461,12 +467,12 @@ HWA:{map:'nz',ko:'레이크 하웨아 · 와나카',en:'LAKE HAWEA',p:[-44.61,16
  ['That Wanaka Tree','호수에 잠긴 채 자란 버드나무. 와나카 호숫가 Roys Bay에 있음.'],
  ['보급','하웨아는 소형 Four Square뿐. 큰 마트와 주유는 와나카 시내(차 15분).']]},
 BAN:{map:'nz',ko:'배녹번 · 크롬웰',en:'BANNOCKBURN',p:[-45.08,169.17],main:1,
- dr:['운전','와나카 85km · 1시간10분 / 퀸스타운 65km · 1시간 (크라운레인지)'],f:[
+ dr:['운전','와나카 85km · 1시간10분 / 퀸스타운 65km · 1시간 (SH6 카와라우 협곡)'],f:[
  ['왜 하필 여기서 피노누아인가','남위 45도, 산맥이 비를 막아 연강수량 350mm 안팎의 건조한 대륙성 기후. 밤낮 일교차가 커서 익으면서도 산미가 남음. 센트럴 오타고 재배의 70% 이상이 피노누아.'],
  ['달 표면 같은 절벽','1860년대 골드러시 때 물대포로 산을 깎아낸 채굴(sluicing) 흔적이 그대로 노출된 것. 와이너리 사이를 지나며 보임.'],
  ['시음 매너','명가일수록 무료인 경우가 많음(유럽식 전통). 운전자가 뱉는 것(spittoon)은 결례가 아니라 정상.'],
  ['크롬웰','퀸스타운 전 마지막 큰 마트(New World). 체리·살구 과일 노점이 유명함.'],
- ['크라운레인지','뉴질랜드에서 가장 높은 포장 간선도로(1,076m). 급커브·급경사라 캠퍼밴은 저단 기어로.']]},
+ ['크라운레인지','뉴질랜드에서 가장 높은 포장 간선도로(1,076m). 와나카와 퀸스타운을 가장 짧게 잇지만 렌탈 캠퍼밴 대부분이 계약으로 금지하는 구간이라, 캠퍼밴은 SH6 카와라우 협곡으로 돈다.']]},
 ZQN:{map:'nz',ko:'퀸스타운',en:'QUEENSTOWN',p:[-45.02,168.74],main:1,
  dr:['운전','크롬웰 65km · 1시간 / 글레노키 45km · 45분 / 밀포드 290km · 4시간'],f:[
  ['호수가 숨을 쉰다','와카티푸는 약 25분 주기로 수위가 10~20cm 오르내림(세이시 현상). 마오리 전설은 이것을 호수 바닥에 잠든 거인 마타우의 심장박동이라고 설명함.'],
@@ -475,11 +481,11 @@ ZQN:{map:'nz',ko:'퀸스타운',en:'QUEENSTOWN',p:[-45.02,168.74],main:1,
  ['교통','Orbus 신용카드 탭 $2(Bee Card)/현금 $4. 시내 주차는 좁고 비싸 캠퍼밴은 비추천.'],
  ['물가','액티비티는 세계 최상위. 반면 트레킹·호수·트레일은 전부 무료.']]},
 RTB:{map:'nz',ko:'루트번',en:'ROUTEBURN',p:[-44.72,168.27],spur:1,
- dr:['운전','퀸스타운 68km · 1시간15분 (글레노키 경유, 이후 비포장)'],f:[
+ dr:['운전','셔틀 1시간15분 (글레노키 경유) · 글레노키 이후 부분 비포장이라 캠퍼밴 진입 불가'],f:[
  ['왜 여기만 숲인가','남알프스가 편서풍을 막아 서쪽 피오르드랜드는 연강수량 7m, 동쪽 매켄지는 350mm. 같은 섬에서 테카포와 루트번 풍경이 전혀 다른 이유가 이 산맥 하나.'],
  ['이끼 덮인 너도밤나무','곤드와나 대륙 시절부터 이어진 남반구 계통의 숲. 비가 많아 나무마다 이끼가 두껍게 붙음.'],
  ['샌드플라이 전설','마오리 전설에서는 여신 히네누이테포가 사람들이 피오르드랜드의 아름다움에 넋 놓고 머물지 않도록 풀어놓았다고 함.'],
- ['도로·주차','글레노키 이후 비포장. 트레일헤드 주차장에서 차량털이 사례가 있어 귀중품은 두지 말 것.'],
+ ['도로·주차','글레노키 이후 25km가 부분 비포장. 렌탈 캠퍼밴은 포장도로만 허용이라 셔틀이 사실상 유일한 수단. 트레일헤드 주차장에서 차량털이 사례가 있어 귀중품은 두지 말 것.'],
  ['통신','신호 없음. 지도와 날씨는 출발 전에 저장.'],
  ['그레이트 워크','국가 지정 장거리 트레일. 산장은 예약제지만 당일 왕복 구간은 예약도 비용도 없음.']]},
 VS:{map:'syd',ko:'노스 시드니',en:'NORTH SYDNEY',p:[-33.840,151.207],main:1,
@@ -569,6 +575,38 @@ const RES=[['국내선 · JQ233','12/2','₩192,968','완료 (9/8)',null,null],
 ['대한항공 왕복 · 마일리지','12/1–16','₩2,040,000','완료 — 마일리지+현금 2인',null,null],
 ['ETA / NZeTA+IVL','출발 전','A$20 / $117','완료',null,null],
 ['여행자보험 2인','12/1–16','₩18,870','완료',null,null]];
+
+const DRV=[
+{w:'좌측통행 · 우핸들',n:'운전',f:'남섬 10일 · 7m 캠퍼밴',r:[
+ ['ok','왼쪽은 짧게, 오른쪽은 길게','좌회전은 짧게, 우회전은 크게 돈다. 차선 실수의 대부분이 이 감각 하나로 줄어든다.'],
+ ['ok','라운드어바웃 — 오른쪽에서 오는 차 양보','이미 원 안에 있는 차가 우선. 진입 전 Yield 표시 확인, 나갈 출구 쪽으로 미리 깜빡이. 타이밍을 놓치면 한 바퀴 더 돌면 된다.'],
+ ['no','Passing Lane 2차선 주행','2차선은 추월 전용이다. 캠퍼밴은 1차선 유지. 모르고 2차선을 달리면 경적과 손짓이 따라온다.'],
+ ['ok','추월차선 없는 길에서는 비켜주기','뒤가 밀리면 노견 공터에 잠시 세우고 보낸다. 캠퍼밴은 느린 게 정상이라 눈치 볼 일이 아니다.'],
+ ['no','GIVE WAY 무시','단선 교량과 합류 지점에 많다. 표시가 있으면 무조건 먼저 오는 차 우선 — 놓치면 바로 범칙금.'],
+ ['i','차선을 밟으면 덜컹거린다','차선 도료가 일부러 요철이다. 이탈 경보 장치 개념이라 고장이 아니다.'],
+ ['i','사실상 90km/h가 한계','캠퍼밴은 제한속도보다 낮게 묶이는 경우가 많고 실제로도 그 이상 내기 어렵다. 소요시간을 넉넉히 잡는 쪽이 맞다.'],
+ ['no','음주운전','만 20세 이상 혈중 0.05%. 12/9·12/10 이틀 연속 와이너리라 운전자는 뱉는다(spittoon) — 결례가 아니라 정상이다.']]},
+{w:'3.10m × 7.00m × 2.25m',n:'주차',f:'딱지와 사고는 대부분 여기서',r:[
+ ['no','진행 방향과 반대로 주차','뉴질랜드에서는 역방향 주차가 불법이다. 달리는 방향과 같은 방향으로만 세운다.'],
+ ['no','노란 선 — 점선·실선 모두','주차 금지다. 자리가 비어 있는 데는 이유가 있다.'],
+ ['no','지하주차장 · 드라이브스루','높이 3.10m가 안 들어간다. Kmart 리카턴이 대표적인 예.'],
+ ['ok','관광지는 캠퍼밴 구역이 따로 있다','테카포·마운트쿡·캐슬힐 등. 캠퍼밴이 모여 있는 쪽으로 가면 된다.'],
+ ['i','마트에서는 일반 칸 2칸','캠퍼밴 전용존은 없다. 라인을 꽉 채우면 옆 차가 문을 못 연다.']]},
+{w:'엔진 걸기 전 1분',n:'출발 전 매일',f:'빠뜨리면 주행 중에 티가 난다',r:[
+ ['ok','화장실 변기 물 밸브 잠금','열어둔 채 달리면 물이 넘친다.'],
+ ['ok','창문·문 완전히 닫고 락 확인','문 하나가 열려 있으면 소음부터 안전사고까지 간다. 차체가 커서 체감이 크다.'],
+ ['ok','어닝 고리 고정','펴진 채 또는 덜 걸린 채 출발하면 주행풍에 찢어진다. 자기부담 항목이다.'],
+ ['ok','실내 물건 고정','주행 중 흔들리는 소리가 상당하다. 선반 위 물건은 싱크나 바닥으로 내린다.'],
+ ['i','휴대폰 거치대는 필수','내비를 계속 봐야 하는 차라 손에 들고는 못 한다. 선택이 아니다.'],
+ ['i','실내는 원래 시끄럽다','바람·엔진·적재물 소리가 겹쳐 옆자리 대화가 잘 안 들린다. 고장이 아니다.']]},
+{w:'위반 시 보험 전액 무효 + $300',n:'진입 금지 도로',f:'Maui 26/27 계약 · GPS 기록됨',r:[
+ ['i','원칙 — 포장도로만','"All RVs can only be driven on sealed/bitumen roads." 예외는 스키장 접근로와 5km 미만의 공인 캠핑장 접근로뿐이다.'],
+ ['no','크라운레인지 / 카드로나 밸리','Arrow Junction↔Cardrona 구간. 와나카↔퀸스타운 최단 경로지만 금지라, 12/9는 SH6 카와라우 협곡으로 돈다. 구글맵이 이쪽을 추천한다.'],
+ ['no','스키퍼스 로드','12/10 래프팅 장소로 가는 길. 업체 4WD 버스로만 이동하고 차로 따라가지 않는다.'],
+ ['no','Mt Aspiring Rd — Treble Cone 분기 이후','와나카에서 다이아몬드 레이크·롭로이 빙하 방향. 12/8 자유시간에 나가기 쉬운 길이다.'],
+ ['no','루트번 — 글레노키 이후 25km','부분 비포장이라 캠퍼밴 진입 불가. 12/11은 셔틀.'],
+ ['no','태즈먼밸리 · 볼헛 로드','마운트쿡의 블루레이크·빙하 전망대 방향 8km 비포장. 반면 후커밸리 진입로는 캠핑장 접근로라 허용된다.'],
+ ['i','날씨에 따라 추가된다','폭설·홍수·산사태 시 렌탈사가 구간을 더 막을 수 있고, 인수 때 받는 안내가 계약보다 우선한다.']]}];
 
 const TODO=[
 ['sim','유심 / eSIM','NZ·호주 양국 커버. 캠퍼밴 내비·CamperMate용 데이터 필수.',null,null],
@@ -1046,16 +1084,19 @@ TODO.forEach(([id,t,s,due,url])=>{
   }
   l.append(c,d);ck.append(l);
 });
-const lgs=$('#lgs');
-LG.forEach(L=>{
-  const c=el('div','lg'),h=el('div','h');
-  h.append(el('div','w',L.w),el('h4',null,L.n),el('div','f',L.f));
-  const b=el('div','b');
-  L.r.forEach(([k,t,d])=>{const r=el('div','lgr'),m=el('span','m '+k,k==='no'?'×':k==='ok'?'✓':'·');
-    const x=el('div');x.append(el('b',null,t),document.createElement('br'),el('span',null,d));
-    r.append(m,x);b.append(r);});
-  c.append(h,b);lgs.append(c);
-});
+function cards(host,data){                   /* 라운지와 운전 섹션이 같은 카드 꼴을 쓴다 */
+  data.forEach(L=>{
+    const c=el('div','lg'),h=el('div','h');
+    h.append(el('div','w',L.w),el('h4',null,L.n),el('div','f',L.f));
+    const b=el('div','b');
+    L.r.forEach(([k,t,d])=>{const r=el('div','lgr'),m=el('span','m '+k,k==='no'?'×':k==='ok'?'✓':'·');
+      const x=el('div');x.append(el('b',null,t),document.createElement('br'),el('span',null,d));
+      r.append(m,x);b.append(r);});
+    c.append(h,b);host.append(c);
+  });
+}
+cards($('#drvs'),DRV);
+cards($('#lgs'),LG);
 
 /* ══ init ══ */
 (function(){
