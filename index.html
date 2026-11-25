@@ -316,7 +316,7 @@ footer{border-top:1px solid var(--line);padding:16px 0 34px;color:var(--ink3);fo
     <div class="two">
       <div>
         <details class="fold">
-          <summary><span>예약 내역 17건</span><i>펼치기</i></summary>
+          <summary><span>예약 내역 18건</span><i>펼치기</i></summary>
           <div class="tw"><table><thead><tr><th>항목</th><th>일자</th><th>금액</th><th>결제</th></tr></thead><tbody id="rt"></tbody></table></div>
         </details>
         <a class="sheet" href="https://docs.google.com/spreadsheets/d/16_QMOk2G02nN_jdyKkKQPy7MpyvlonsFtsxgXXEagoE/edit" target="_blank" rel="noopener">예약번호 · 확인메일 · 게이트 코드 → 구글 시트 ↗</a>
@@ -343,7 +343,7 @@ const DAYS=[
  I('13:15','AKL→CHC · JQ233','1h25m · 14:40 도착','위탁 현진 20kg / 두환 30kg — 무게제라 개수는 무관 (개당 32kg 이하) · 기내 7kg · 수하물 마감 출발 30분 전','done','Christchurch+Airport'),
  I('저녁','더하이웨이인 체크인','527 Sawyers Arms Rd','다음날 08:00 픽업','done','The+Highway+Inn+527+Sawyers+Arms+Road+Christchurch')]},
 {date:'12/3',dow:'목',leg:'nz',spot:'CHC',sc:'plains',title:'캠퍼밴 픽업',stay:'프리 캠핑',items:[
- I('08:00','Maui 픽업','Cascade 4 Berth · 159 Orchard Rd · 인수 1h','여권 · 국제운전면허증+한국면허증 · ⚠️ 운전자 명의 <b>신용카드</b>(보증금) — 풀커버 옵션은 신용카드 임프린트 필수, 체크카드는 보증금 전액이 즉시 출금되니 그만큼 충전돼 있어야 함 · 주방 풀세트가 기본 포함이니 인수 때 품목 리스트를 받아 빠진 것만 메모','done','Maui+Christchurch+159+Orchard+Road'),
+ I('08:00','Maui 픽업','Cascade 4 Berth · 159 Orchard Rd · 인수 1h','온라인 체크인 완료 ✅ · 대여료 완납이라 잔금 없음 · 여권 · 국제운전면허증+한국면허증(2종 보통 가능, 자동 한정이면 자동 차량 확인) · 면책금 0 최대보장 선택 ✅ → 보증금은 <b>$250 신용카드 승인</b> 수준 (임프린트라 체크카드 불가) · 최대보장도 지붕·하부·타이어·유리창·비포장도로는 제외되는 경우가 많으니 인수 때 확인 · 주방 풀세트 포함이니 인수 때 품목 리스트 받아 빠진 것만 메모 · EWOF 라벨 유효기간 확인(파워사이트 연결 조건)','done','Maui+Christchurch+159+Orchard+Road'),
  I('09:15','잡화 · The Warehouse','45 Chalmers St, Hornby — Pak\'nSave 바로 옆, 같은 상권이라 차 한 번만 세우면 됨','수건·슬리퍼·캠핑의자·보냉백 · 방충제와 선크림도 여기서 보충(테카포·와나카는 선택지가 없어 훨씬 비쌈) · 남섬엔 다이소급 저가점이 없고 Kmart은 리카턴뿐인데 지하주차장이라 캠퍼밴 진입 불가',null,'The+Warehouse+The+Hub+45+Chalmers+Street+Hornby+Christchurch'),
  I('10:00','장보기 · Pak\'nSave Hornby','The Hub, 418 Main South Rd — 공항에서 15분 · 냉장식품은 마지막에 사서 바로 냉장고로','뉴질랜드 최저가 체인 · 지상 주차라 캠퍼밴 진입 가능 · 장바구니 지참(무료 봉투 없음) · 9박치를 여기서 한 번에',null,'PAKnSAVE+Hornby+Christchurch'),
  I('목록','마트에서 살 것','Whittaker\'s 초콜릿 · Pineapple Lumps · L&P 탄산 · Tip Top 호키포키 아이스크림 · Watties 토마토소스 · Cookie Time','마누카 꿀은 슈퍼가 면세점보다 쌈 (UMF/MGO 등급 확인) · 12월은 체리·살구 제철이라 과일 노점도 노려볼 것',null,'PAKnSAVE+Hornby+Christchurch'),
@@ -549,7 +549,8 @@ FM:'만이자 도심 지구 · 시드니 CBD 서쪽 · 피시마켓은 그 남�
 
 const RES=[['국내선 · JQ233','12/2','NZD 238','완료',238,'NZD'],
 ['CHC 호텔 · Highway Inn','12/2–3','NZD 138','확인 필요',138,'NZD'],
-['캠퍼밴 · Maui Cascade','12/3–12','₩1,208,672','선금 완료 · 잔금/보증금 확인',null,null],
+['캠퍼밴 · Maui Cascade','12/3–12','₩3,700,000','완납 (10/5)',null,null],
+['캠퍼밴 편도 반납료','11/25','₩360,000','완료 — 온라인 체크인 시',null,null],
 ['테카포 · Lakes Edge','12/4–6','확인 메일 참조','현장 — 12/4 아침 카드 자동',null,null],
 ['푸카키 차박','12/6','무료','—',null,null],
 ['와나카 · The Camp','12/7–9','₩97,500','완료',null,null],
