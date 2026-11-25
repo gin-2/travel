@@ -351,6 +351,7 @@ const DAYS=[
 {date:'12/8',dow:'화',leg:'nz',spot:'HWA',sc:'wanaka',title:'와나카 · 사우나',stay:'The Camp 2박째',items:[
  I('오전~','와나카 자유시간',null,'호수 수영 · 시내 · 카페 · That Wanaka Tree · 차로 나갈 땐 와나카 호수 남북 도로까지만 — Mt Aspiring Rd(Treble Cone 이후)와 카드로나 밸리는 캠퍼밴 금지',null,'Lake+Wanaka'),
  I('(선택)','Rippon','무료 시음 · 예약제','미예약 — 워크인 불가할 수 있음','opt','Rippon+Vineyard+Wanaka'),
+ I('대안','로이스 피크 — 체력 쓸 의향이면','와나카 서쪽 6km, Mt Aspiring Rd · 왕복 16km · 5~7h · +1,258m — 뉴질랜드에서 사진으로 가장 유명한 능선','마우이가 캠퍼밴 주차 가능이라 명시한 무료 주차장 (금지 구간인 Treble Cone 분기보다 한참 앞) · 성수기엔 09시에 만차라 이른 출발 필수 · 화장실·물 없음, 와나카에서 준비','opt','Roys+Peak+Track+Wanaka'),
  I('19:00','The Secret Sauna','공용 2시간 · NZD 128','수영복·수건·슬리퍼 · 캠핑장 내 도보 · 일몰 21:20','done','The+Secret+Sauna+Lake+Hawea')]},
 {date:'12/9',dow:'수',leg:'nz',spot:'BAN',sc:'vine',title:'배녹번 와이너리',stay:'Driftaway 1박째',items:[
  I('10:00','체크아웃 → 배녹번','1h10m','오수/물탱크 처리',null,'Bannockburn+Central+Otago'),
@@ -366,8 +367,9 @@ const DAYS=[
  I('17:00','쇼핑 리스트','메리노·포섬 메리노 니트 · 어그 · 마누카 꿀 · 현지 로스터 원두 · 그린스톤(포우나무)','포섬 메리노는 뉴질랜드에서만 나는 혼방 · 가게는 맛집·볼거리 탭 참고',null,'Queenstown+town+centre'),
  I('20:30','Orbus로 복귀','15~20분','Bee Card $2 / 현금 $4',null,'Queenstown+Bus+Hub')]},
 {date:'12/11',dow:'금',leg:'nz',spot:'RTB',sc:'forest',title:'루트번 트레킹',stay:'Driftaway 3박째',items:[
- I('08:00','Routeburn Track','Shelter→Falls Hut 왕복 9km · 4~6h · 오르막 520m · 무료 — 그레이트 워크 10선 중 하나. 보통 2~3일 종주지만 이 구간만으로 계곡·폭포·산장 전망이라는 핵심을 다 봄. 밀포드와 같은 피오르드랜드 생태.','<b>캠퍼밴으로 못 간다 — 셔틀을 예약할 것.</b> 글레노키 이후 25km가 자갈·좁은 1차선이고 입구에 캠퍼밴 금지 표지가 있음. 퀸스타운 왕복 셔틀 1인 NZ$90~110 · 우비·샌드플라이 기피제','warn','Routeburn+Shelter',1),
+ I('08:00','Routeburn Track','Shelter→Falls Hut 왕복 9km · 4~6h · 오르막 520m · 무료 — 그레이트 워크 10선 중 하나. 보통 2~3일 종주지만 이 구간만으로 계곡·폭포·산장 전망이라는 핵심을 다 봄. 밀포드와 같은 피오르드랜드 생태.','<b>미정 — 셔틀 예약 여부를 먼저 결정할 것.</b> 캠퍼밴은 진입 불가(글레노키 이후 25km 자갈·좁은 1차선, 입구에 금지 표지). 퀸스타운 왕복 셔틀 1인 NZ$90~110 · 안 가면 아래 대안으로 · 우비·샌드플라이 기피제','warn','Routeburn+Shelter',1),
  I('오후','퀸스타운 복귀','셔틀 1시간 15분','캠퍼밴은 캠핑장에 두고 가는 날',null,'Queenstown'),
+ I('대안','벤 로몬드 — 루트번을 안 갈 경우','곤돌라 상부역 → 새들(1,326m) 왕복 7km · 3~4h · 시내에서 걸어 올라가면 14km·6~8h·+1,438m','운전 불필요 — Brecon St 곤돌라 베이스에서 티키 트레일로 바로 · 정상 구간은 급경사 낙하 있음 · 상부역 이후 물 없음','opt','Ben+Lomond+Track+Queenstown'),
  I('저녁 A','캠핑장에서 마무리','마지막 밤을 조용히','Frankton Beach 호숫가 · 짐 싸기와 차량 정리를 느긋하게','opt','Driftaway+Queenstown'),
  I('저녁 B','시내 추가 쇼핑','Orbus 15~20분 · 상점 ~21시','어제 못 산 게 있으면. 돌아와서 짐 싸면 늦어지는 건 감수','opt','Queenstown+town+centre'),
  I('밤','짐 정리',null,'캐리어 패킹 + 차량 내부 정리 (오수·물탱크는 다음날 아침)',null,'Driftaway+Queenstown')]},
@@ -586,6 +588,7 @@ const DRV=[
 const TODO=[
 ['sim','유심 / eSIM','NZ·호주 양국 커버. 캠퍼밴 내비·CamperMate용 데이터 필수.',null,null],
 ['nztd','NZ 입국신고서 (NZTD)','2인 각자 10분. 도착편은 인천→오클랜드 KE편, 첫 숙소는 The Highway Inn 527 Sawyers Arms Rd. 음식과 등산화는 반드시 Yes.','11/30 밤부터','https://app.travellerdeclaration.govt.nz'],
+['trek','12/11 트레킹 — 루트번이냐 로이스 피크냐','<b>선택 A</b> 루트번 유지 + 셔틀 예약 (2인 약 NZ$200). 캠퍼밴 진입 불가라 셔틀이 유일한 수단. 그레이트 워크·피오르드랜드 이끼 숲은 이날밖에 못 봄. · <b>선택 B</b> 12/8 와나카 자유시간을 로이스 피크로 쓰고(마우이가 캠퍼밴 주차 가능이라 명시 · 16km·5~7h·+1,258m) 12/11은 곤돌라+벤 로몬드 새들로 가볍게(7km·3~4h). 돈이 안 들고 체력 분배가 고르다. · 성수기라 셔틀이 마감될 수 있어 A로 갈 거면 출발 전에 예약.','12/1 출발 전',null],
 ['idp','국제운전면허증','2인 모두. 경찰서·면허시험장 당일 발급(여권+면허증+사진). 2종 보통 가능하나 한국 면허증도 같이 소지해야 유효.','12/3 인수 전 필수',null],
 ['fx','트래블로그 충전','NZD·AUD. 원화 결제(DCC) 제안은 거절.',null,null],
 ['card','12/8 결제 카드 확인','View Sydney AUD 965.04가 아고다에서 자동 청구된다. 와나카에 있을 때라 실패하면 대응이 어렵다. 해당 카드 한도·잔액 확인.','12/8 전',null],
