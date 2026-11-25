@@ -213,6 +213,12 @@ td .krw{display:block;font-size:.7rem;color:var(--ink3)}
 .ckr b{font-size:.88rem;font-weight:600;display:block}
 .ckr span{font-size:.78rem;color:var(--ink2)}
 .ckr.on b{text-decoration:line-through;color:var(--ink3)}
+.ckr .due{display:inline-block;margin-left:7px;padding:1px 7px;border-radius:20px;background:var(--acc-soft);
+  color:var(--acc-ink);font-size:.66rem;font-style:normal;font-weight:700;vertical-align:1px}
+.ckr.on .due{background:var(--surface2);color:var(--ink3)}
+.ckr .golink{display:inline-block;margin-top:6px;padding:4px 11px;border-radius:20px;background:var(--acc);
+  color:#fff;font-size:.72rem;font-weight:600;text-decoration:none}
+.ckr .golink:hover{filter:brightness(1.08)}
 .fold{border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden}
 .fold>summary{list-style:none;cursor:pointer;padding:13px 16px;display:flex;align-items:center;gap:10px;font-size:.9rem;font-weight:500}
 .fold>summary::-webkit-details-marker{display:none}
@@ -571,7 +577,9 @@ const TODO=[['보험 증권 오프라인 저장','가입 완료 ✅ — 증권�
 ['유심 / eSIM','NZ·호주 양국 커버. 캠퍼밴 내비·CamperMate용 데이터 필수.'],
 ['게이트 코드 캡처','Felton Road 게이트 코드 — 배녹번 산간이라 신호가 약하다. 시트에서 확인해 스크린샷으로 저장.'],
 ['트래블로그 충전','NZD·AUD. 원화 결제(DCC) 제안은 거절.'],
-['PP 무료 횟수 확인','인천은 모닝캄으로 해결하므로 PP는 1인 2회(퀸스타운·시드니)만 필요. 카드 발급 PP는 연 2~3회짜리도 있으니 앱에서 잔여 횟수 확인.']];
+['PP 무료 횟수 확인','인천은 모닝캄으로 해결하므로 PP는 1인 2회(퀸스타운·시드니)만 필요. 카드 발급 PP는 연 2~3회짜리도 있으니 앱에서 잔여 횟수 확인.'],
+['NZ 입국신고서 (NZTD)','2인 각자 10분. 도착편은 인천→오클랜드 KE편, 첫 숙소는 The Highway Inn 527 Sawyers Arms Rd. 음식과 등산화는 반드시 Yes.','11/30 밤부터','https://app.travellerdeclaration.govt.nz'],
+['국제운전면허증','2인 모두. 경찰서·면허시험장 당일 발급(여권+면허증+사진). 2종 보통 가능하나 한국 면허증도 같이 소지해야 유효.','12/3 인수 전 필수',null]];
 
 const LG=[{w:'인천 T2 · 12/1',n:'대한항공 프레스티지 라운지',f:'ICN → AKL · KE 탑승',r:[
  ['ok','확정 — 둘 다 모닝캄 자격으로','동반자가 아니라 각자 자격이라 함께 입장 가능. 각자 2년 4회 중 1회씩 차감.'],
@@ -1025,11 +1033,19 @@ function resPaint(){
   });
 }
 const ck=$('#ck');
-TODO.forEach(([t,s],i)=>{
+TODO.forEach(([t,s,due,url],i)=>{
   const l=el('label','ckr'),c=document.createElement('input');c.type='checkbox';
   c.checked=!!store.get('trip.t.'+i,false);if(c.checked)l.classList.add('on');
   c.addEventListener('change',()=>{store.set('trip.t.'+i,c.checked);l.classList.toggle('on',c.checked);});
-  const d=el('div');d.append(el('b',null,t),el('span',null,s));l.append(c,d);ck.append(l);
+  const d=el('div'),hd=el('b',null,t);
+  if(due)hd.append(el('i','due',due));
+  d.append(hd,el('span',null,s));
+  if(url){                                   // 링크 클릭이 체크박스를 토글하지 않게
+    const a=el('a','golink');a.href=url;a.target='_blank';a.rel='noopener';a.textContent='바로가기 ↗';
+    a.addEventListener('click',e=>e.stopPropagation());
+    d.append(a);
+  }
+  l.append(c,d);ck.append(l);
 });
 const lgs=$('#lgs');
 LG.forEach(L=>{
