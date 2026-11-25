@@ -93,6 +93,9 @@ input{font-family:inherit}
 .fx .edit:hover{color:var(--ink);border-color:var(--line2)}
 .fx .stamp{margin-left:auto;font-size:.68rem;color:var(--ink3)}
 .fx .stamp.stale{color:var(--acc-ink);font-weight:600}
+.pay{display:inline-block;padding:2px 7px;border-radius:20px;font-size:.68rem;white-space:nowrap}
+.pay.ok{background:var(--surface2);color:var(--ink3)}
+.pay.due{background:var(--acc-soft);color:var(--acc-ink);font-weight:600}
 .sheet{display:block;margin-top:10px;padding:11px 14px;background:var(--acc-soft);border:1px solid var(--acc);
   border-radius:var(--r);color:var(--acc-ink);text-decoration:none;font-size:.82rem;font-weight:600}
 .sheet:hover{background:var(--acc);color:#fff}
@@ -314,7 +317,7 @@ footer{border-top:1px solid var(--line);padding:16px 0 34px;color:var(--ink3);fo
       <div>
         <details class="fold">
           <summary><span>예약 내역 17건</span><i>펼치기</i></summary>
-          <div class="tw"><table><thead><tr><th>항목</th><th>일자</th><th>금액</th></tr></thead><tbody id="rt"></tbody></table></div>
+          <div class="tw"><table><thead><tr><th>항목</th><th>일자</th><th>금액</th><th>결제</th></tr></thead><tbody id="rt"></tbody></table></div>
         </details>
         <a class="sheet" href="https://docs.google.com/spreadsheets/d/16_QMOk2G02nN_jdyKkKQPy7MpyvlonsFtsxgXXEagoE/edit" target="_blank" rel="noopener">예약번호 · 확인메일 · 게이트 코드 → 구글 시트 ↗</a>
         <div class="keys">Mt Difficulty <b>+64 3 445 3445</b> (15분 홀드) · Maui 반납 <b>16:30</b> · Amisfield 셀러도어 <b>16:30</b> 마감 · 결제는 현지 통화로</div>
@@ -347,7 +350,7 @@ const DAYS=[
  I('저녁','프리 캠핑 · Coes Ford','The Lake Road, Leeston · 셀윈 강변 · Selwyn 지구 지정 구역 · 무료 · 연중 · 최대 28박','크라이스트처치에서 35분 (Hornby에서 25분) · 수세식 화장실·식수 있음 · 덤프스테이션 없음 · 다음날 SH1 남행과 동선 일치 · 백업: Lakeside Domain(무료) / Waihora Park($10)',null,'Coes+Ford+Recreation+Reserve+The+Lake+Road+Leeston')]},
 {date:'12/4',dow:'금',leg:'nz',spot:'TKP',sc:'lake',title:'테카포 이동',stay:'Lakes Edge 1박째',items:[
  I('오전','CHC→테카포','3h · 227km','제럴딘 휴게',null,'Lake+Tekapo'),
- I('15:00','Lakes Edge 체크인','호수 정면 Powered 사이트','체크인 15:00 / 체크아웃 10:00','done','Lakes+Edge+Holiday+Park+Tekapo'),
+ I('15:00','Lakes Edge 체크인','호수 정면 Powered 사이트 · 현장 결제 — 12/4 아침 예약 카드에서 자동 인출','체크인 15:00 / 체크아웃 10:00 · 신용카드 결제 시 2% 수수료 · 파워사이트는 캠퍼밴 EWOF(전기안전검사증) 라벨 필요 · ⚠️ WhatsApp 결제 요청은 사기, 공식 +64 3 680 6825','done','Lakes+Edge+Holiday+Park+Tekapo'),
  I('저녁','선한 양치기 교회 · 별','다크스카이 보호구역','내일 트레킹 날씨 확인 → 4·5일 중 맑은 날',null,'Church+of+the+Good+Shepherd+Tekapo')]},
 {date:'12/5',dow:'토',leg:'nz',spot:'AKI',sc:'alps',title:'마운트쿡 트레킹',stay:'Lakes Edge 2박째',items:[
  I('06:00','테카포→마운트쿡','편도 1h10m','날씨 나쁘면 4일과 교체 · 주차장 성수기 혼잡',null,'Aoraki+Mount+Cook'),
@@ -544,15 +547,23 @@ BON:'해변 교외 · 시드니 CBD에서 동쪽 7km',
 MAN:'해변 교외 · 하버 입구 북쪽 · CBD에서 페리 30분',
 FM:'만이자 도심 지구 · 시드니 CBD 서쪽 · 피시마켓은 그 남쪽 블랙와틀 베이 쪽'};
 
-const RES=[['국내선 · JQ233','12/2','NZD 238',238,'NZD'],['CHC 호텔 · Highway Inn','12/2–3','NZD 138',138,'NZD'],
-['캠퍼밴 · Maui Cascade','12/3–12','₩1,208,672',null,null],['테카포 · Lakes Edge','12/4–6','—',null,null],
-['푸카키 차박','12/6','무료',null,null],['와나카 · The Camp','12/7–9','₩97,500',null,null],
-['시크릿 사우나 ×2','12/8','NZD 128',128,'NZD'],['Mt Difficulty','12/9','$25/인+식사',null,null],
-['Felton Road','12/9','무료',null,null],['퀸스타운 · Driftaway','12/9–12','NZD 240',240,'NZD'],
-['Shotover 래프팅','12/10','—',null,null],['Amisfield','12/10','$40/인',null,null],
-['Routeburn','12/11','무료',null,null],['호주행 · VA162','12/12','NZD 917.93',917.93,'NZD'],
-['시드니 · View Sydney','12/12–15','AUD 919.05',919.05,'AUD'],['귀국 · KE402','12/15','—',null,null],
-['ETA / NZeTA+IVL','출발 전','A$20 / $117',null,null]];
+const RES=[['국내선 · JQ233','12/2','NZD 238','완료',238,'NZD'],
+['CHC 호텔 · Highway Inn','12/2–3','NZD 138','확인 필요',138,'NZD'],
+['캠퍼밴 · Maui Cascade','12/3–12','₩1,208,672','선금 완료 · 잔금/보증금 확인',null,null],
+['테카포 · Lakes Edge','12/4–6','확인 메일 참조','현장 — 12/4 아침 카드 자동',null,null],
+['푸카키 차박','12/6','무료','—',null,null],
+['와나카 · The Camp','12/7–9','₩97,500','완료',null,null],
+['시크릿 사우나 ×2','12/8','NZD 128','완료',128,'NZD'],
+['Mt Difficulty','12/9','$25/인+식사','현장',null,null],
+['Felton Road','12/9','무료','—',null,null],
+['퀸스타운 · Driftaway','12/9–12','NZD 240','잔금 현장 — 카드 2.5% 수수료',240,'NZD'],
+['Shotover 래프팅','12/10','확인 필요','확인 필요',null,null],
+['Amisfield','12/10','$40/인','현장',null,null],
+['Routeburn','12/11','무료','—',null,null],
+['호주행 · VA162','12/12','NZD 917.93','완료',917.93,'NZD'],
+['시드니 · View Sydney','12/12–15','AUD 919.05','12/8 자동결제 예정',919.05,'AUD'],
+['귀국 · KE402','12/15','—','발권 완료',null,null],
+['ETA / NZeTA+IVL','출발 전','A$20 / $117','완료',null,null]];
 
 const TODO=[['보험 증권 오프라인 저장','가입 완료 ✅ — 증권번호와 24시간 사고접수 번호를 캡처해 둘 것. 산간·해상에서 신호가 없으면 못 찾는다.'],
 ['유심 / eSIM','NZ·호주 양국 커버. 캠퍼밴 내비·CamperMate용 데이터 필수.'],
@@ -1000,12 +1011,15 @@ function drawGuide(){
 /* ══ res / todo / lounge ══ */
 function resPaint(){
   const tb=$('#rt');tb.innerHTML='';
-  RES.forEach(([a,b,d,amt,cu])=>{
+  RES.forEach(([a,b,d,pay,amt,cu])=>{
     const tr=document.createElement('tr');
     tr.append(el('td',null,a),el('td','n',b));
     const td=el('td','n',d);
     if(amt&&FX[cu])td.append(el('span','krw','≈ '+won(amt*FX[cu])));
-    tr.append(td);tb.append(tr);
+    tr.append(td);
+    const ps=el('td','n');                       // 예약 완료와 결제 완료는 다르다
+    ps.append(el('span','pay'+(/완료|—/.test(pay)&&!/확인/.test(pay)?' ok':' due'),pay));
+    tr.append(ps);tb.append(tr);
   });
 }
 const ck=$('#ck');
